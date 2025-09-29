@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -14,6 +14,10 @@ let initialList = [
 export default function TodoList() {
     const [list, setList] = useState(initialList);
     const [textInput, setTextInput] = useState('');
+
+    useEffect(() => {
+        localStorage.setItem('todoList', JSON.stringify(list));
+    }, [list]);
 
     const handleChange = e => {
         setTextInput(e.target.value);
@@ -43,8 +47,14 @@ export default function TodoList() {
         setList(updatedList);
     };
 
+    const deleteTodo = (id) => {
+        const updatedList = list.filter(item => item.id !== id);
+        setList(updatedList);
+
+    };
+
     let todoItems = list.map((item) => {
-        return <TodoItem key={item.id} todo={item} markAsDone={markAsDone}/>
+        return <TodoItem key={item.id} todo={item} markAsDone={markAsDone} deleteTodo={deleteTodo}/>
     });
 
     return (
