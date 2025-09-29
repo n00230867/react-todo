@@ -1,6 +1,6 @@
 import { Badge, ListGroupItem } from "react-bootstrap";
 
-export default function TodoItem({ todo }) {
+export default function TodoItem({ todo, markAsDone }) {
 
     return (
         <ListGroupItem>
@@ -12,11 +12,10 @@ export default function TodoItem({ todo }) {
             ) : (
                 <>
                     {todo.text}
-                    <Badge pill bg="success" className="float-end" onClick={() => {prop.markAsDone(todo.id)}}>&#10003;</Badge>
+                    <Badge pill bg="success" className="float-end pe-auto" onClick={() => {markAsDone(todo.id)}}>&#10003;</Badge>
                 </>
             )}
 
         </ListGroupItem>
     );
-
-}
+};
