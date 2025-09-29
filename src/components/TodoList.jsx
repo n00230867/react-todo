@@ -11,6 +11,11 @@ let initialList = [
     { id: 3, text: 'Create react todo app', done: false }
 ];
 
+let savedList = localStorage.getItem('todoList');
+    if (savedList) {
+        initialList = JSON.parse(savedList);
+};
+
 export default function TodoList() {
     const [list, setList] = useState(initialList);
     const [textInput, setTextInput] = useState('');
